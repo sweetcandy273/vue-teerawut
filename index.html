@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ธีระวุฒิแอร์</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #e6f2ff;
+      }
+
+      .navbar-custom {
+        background-color: #1e88e5;
+      }
+
+      .navbar-brand,
+      .nav-link,
+      .dropdown-item {
+        color: #ffffff !important;
+        font-weight: 500;
+      }
+
+      .nav-link:hover,
+      .dropdown-item:hover {
+        color: #cfe8ff !important;
+      }
+
+      .dropdown-menu {
+        background-color: #1e88e5;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <div class="container-fluid">
+        <!-- Hamburger -->
+        <button
+          class="navbar-toggler me-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">ธีระวุฒิแอร์</a>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >หน้าแรก</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="dataDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                จัดการข้อมูล
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dataDropdown">
+                <li>
+                  <a class="dropdown-item" href="customers.html">ลูกค้า</a>
+                </li>
+                <li><a class="dropdown-item" href="#">ค่าพื้นฐานระบบ</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <h1 class="text-primary">ยินดีต้อนรับสู่ ธีระวุฒิแอร์</h1>
+      <p>เว็บไซต์นี้จัดการลูกค้าและค่าพื้นฐานของระบบแอร์ได้สะดวก</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
