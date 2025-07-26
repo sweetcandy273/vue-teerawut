@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>เข้าสู่ระบบ - ธีระวุฒิแอร์</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #ebebdf;
+      }
+
+      .login-container {
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-login {
+        background-color: #191265;
+        color: white;
+      }
+
+      .btn-login:hover {
+        background-color: #241a90;
+        color: white;
+      }
+
+      #message {
+        margin-top: 1rem;
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 12px;
+        bottom: 8px; /* ห่างจากขอบล่างของ input */
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        user-select: none;
+      }
+
+      .password-wrapper {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h3 class="text-center mb-4">เข้าสู่ระบบ</h3>
+      <form id="loginForm">
+        <div class="mb-3">
+          <label for="username" class="form-label">ชื่อผู้ใช้</label>
+          <input type="text" class="form-control" id="username" required />
+        </div>
+        <div class="mb-3 password-wrapper">
+          <label for="password" class="form-label">รหัสผ่าน</label>
+          <input type="password" class="form-control" id="password" required />
+          <span class="toggle-password" onclick="togglePassword()">🙈</span>
+        </div>
+        <button type="submit" class="btn btn-login w-100">เข้าสู่ระบบ</button>
+        <div id="message" class="text-center"></div>
+      </form>
+    </div>
+
+    <script>
+      const API_URL = "http://127.0.0.1:8000/v1/users/login";
+      function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const icon = document.querySelector(".toggle-password");
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          icon.textContent = "🙈";
+        } else {
+          passwordInput.type = "password";
+          icon.textContent = "👁";
+        }
+      }
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const username = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const messageDiv = document.getElementById("message");
+
+          messageDiv.innerHTML = "กำลังเข้าสู่ระบบ...";
+
+          try {
+            const response = await fetch(
+              //     "https://teerawut-air.onrender.com/v1/users/login",
+              API_URL,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
+              }
+            );
+
+            const result = await response.json();
+
+            if (response.ok) {
+              localStorage.setItem("token", result.result.access_token); // บันทึก token
+              console.log("Token:", result.result.access_token);
+              window.location.href = "index.html"; // ไปหน้า index
+            } else {
+              messageDiv.innerHTML = `<span class="text-danger">${
+                result.message || "เข้าสู่ระบบไม่สำเร็จ"
+              }</span>`;
+            }
+          } catch (error) {
+            messageDiv.innerHTML = `<span class="text-danger">เกิดข้อผิดพลาด: ${error.message}</span>`;
+          }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
